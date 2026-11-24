@@ -1,0 +1,18 @@
+{
+  "Rules": [
+    {
+      "ID": "loki-10d-standard-30d-glacier",
+      "Status": "Enabled",
+      "Filter": { "Prefix": "" },
+      "Transitions": [
+        {
+          "Days": 10,
+          "StorageClass": "GLACIER"
+        }
+      ],
+      "Expiration": {
+        "Days": 40
+      }
+    }
+  ]
+}
