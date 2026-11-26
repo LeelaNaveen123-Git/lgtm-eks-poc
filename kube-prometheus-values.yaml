@@ -1,5 +1,15 @@
 grafana:
-  adminPassword: "AdminPassword123!"
+  admin:
+    existingSecret: "grafana-admin-secret"
+    userKey: "admin-user"
+    passwordKey: "admin-password"
+  persistence:
+    enabled: true
+    type: pvc
+    storageClassName: gp3
+    accessModes:
+      - ReadWriteOnce
+    size: 5Gi
   service:
     type: LoadBalancer
     annotations:
@@ -8,7 +18,7 @@ grafana:
     - name: Loki
       type: loki
       uid: loki
-      url: http://loki.monitoring.svc.cluster.local:3100
+      url: http://loki:3100
       access: proxy
       jsonData:
         derivedFields:
@@ -19,7 +29,7 @@ grafana:
     - name: Tempo
       type: tempo
       uid: tempo
-      url: http://tempo.monitoring.svc.cluster.local:3200
+      url: http://tempo:3200
       access: proxy
       jsonData:
         tracesToLogsV2:
